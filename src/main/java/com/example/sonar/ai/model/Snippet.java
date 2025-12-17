@@ -26,4 +26,9 @@ public class Snippet {
         this.code = code;
         this.name = name;
     }
+    
+    // 仅为测试添加 Getter
+    public String getName() { return name; }
+    public int getLine() { return line; }
+    public String getCode() { return code; }
 }
