@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.example.sonar.ai</groupId>
   <artifactId>ai-code-extractor</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <build>
     <plugins>
       <plugin>
@@ -18,19 +18,9 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.example.sonar.ai.CodeExtractor</mainClass>
+                  <mainClass>com.example.sonar.ai.CodeAnalysisEngine</mainClass>
                 </transformer>
               </transformers>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <excludes>
-                    <exclude>META-INF/*.SF</exclude>
-                    <exclude>META-INF/*.DSA</exclude>
-                    <exclude>META-INF/*.RSA</exclude>
-                  </excludes>
-                </filter>
-              </filters>
             </configuration>
           </execution>
         </executions>
@@ -38,8 +28,8 @@
     </plugins>
   </build>
   <properties>
-    <maven.compiler.target>17</maven.compiler.target>
-    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>

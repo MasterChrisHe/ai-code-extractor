@@ -26,6 +26,4 @@ public class Snippet {
         this.code = code;
         this.name = name;
     }
-
-    // Getters can be added if needed for serialization frameworks other than Gson
 }

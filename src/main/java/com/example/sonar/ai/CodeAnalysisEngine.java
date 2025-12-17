@@ -15,7 +15,6 @@ import java.util.List;
 public class CodeAnalysisEngine {
 
     public static void main(String[] args) {
-        // 参数校验
         if (args.length != 2) {
             System.err.println("Usage: java -jar ai-code-extractor.jar <sourceDir> <rulesFile>");
             System.exit(1);
@@ -29,7 +28,6 @@ public class CodeAnalysisEngine {
         System.err.println("INFO: Rules File: " + rulesFile);
 
         try {
-            // 1. 读取规则
             RuleReader reader = new RuleReader();
             List<Rule> rules = reader.readRules(rulesFile);
 
@@ -38,14 +36,11 @@ public class CodeAnalysisEngine {
                 System.exit(0);
             }
 
-            // 2. 初始化服务并执行提取
             CodeExtractorService service = new CodeExtractorService(sourceDir, rules);
             List<Snippet> allCandidates = service.extractAllCandidates();
 
-            // 3. 将结果以 JSON 格式输出到标准输出 (STDOUT)
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            
-            // 注意：这是程序与外部 Groovy 脚本通信的唯一输出，请勿在此处打印 System.out 调试信息
+            // 注意：这是程序与外部 Groovy 脚本通信的唯一输出
             System.out.println(gson.toJson(allCandidates));
 
             System.err.println("INFO: Extraction complete. JSON output finished.");

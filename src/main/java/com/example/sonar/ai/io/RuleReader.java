@@ -34,7 +34,6 @@ public class RuleReader {
                 }
 
                 // 解析 CSV: RuleID, Scope, Description, Criteria, Context
-                // 限制分割为 5 部分，防止 Context 中的逗号导致分割错误
                 String[] parts = line.split(",", 5);
                 if (parts.length >= 5) {
                     Rule rule = new Rule();

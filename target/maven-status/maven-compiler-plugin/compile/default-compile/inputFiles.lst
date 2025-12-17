@@ -1,1 +1,6 @@
-/home/chris/IdeaProjects/ai-code-extractor/src/main/java/com/example/sonar/ai/CodeExtractor.java
+/home/chris/IdeaProjects/ai-code-extractor/src/main/java/com/example/sonar/ai/CodeAnalysisEngine.java
+/home/chris/IdeaProjects/ai-code-extractor/src/main/java/com/example/sonar/ai/io/RuleReader.java
+/home/chris/IdeaProjects/ai-code-extractor/src/main/java/com/example/sonar/ai/model/Rule.java
+/home/chris/IdeaProjects/ai-code-extractor/src/main/java/com/example/sonar/ai/model/Snippet.java
+/home/chris/IdeaProjects/ai-code-extractor/src/main/java/com/example/sonar/ai/parser/JavaCodeVisitor.java
+/home/chris/IdeaProjects/ai-code-extractor/src/main/java/com/example/sonar/ai/service/CodeExtractorService.java
