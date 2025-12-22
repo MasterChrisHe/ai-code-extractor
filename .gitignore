@@ -1,0 +1,5 @@
+/target/*
+rule.csv
+rule-test.csv
+/.idea
+/.git
