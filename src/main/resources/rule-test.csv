@@ -1,0 +1,2 @@
+RuleID,Scope,RuleDescription,AI_Criteria_EN,AI_Context
+METHOD_javadocComment,METHOD_DECLARATION,抽取每个方法的javadoc,,,

@@ -1,6 +1,0 @@
-com/example/sonar/ai/service/CodeExtractorService.class
-com/example/sonar/ai/CodeAnalysisEngine.class
-com/example/sonar/ai/model/Rule.class
-com/example/sonar/ai/model/Snippet.class
-com/example/sonar/ai/io/RuleReader.class
-com/example/sonar/ai/parser/JavaCodeVisitor.class

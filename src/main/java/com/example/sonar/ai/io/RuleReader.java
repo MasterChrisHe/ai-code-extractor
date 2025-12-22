@@ -1,9 +1,11 @@
 package com.example.sonar.ai.io;
 
 import com.example.sonar.ai.model.Rule;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class RuleReader {
         List<Rule> rules = new ArrayList<>();
         System.err.println("INFO: Reading rules from: " + rulesFile);
         
-        try (BufferedReader br = new BufferedReader(new FileReader(rulesFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rulesFile, StandardCharsets.UTF_8))) {
             String line;
             boolean headerSkipped = false;
             while ((line = br.readLine()) != null) {

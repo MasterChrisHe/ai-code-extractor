@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -35,8 +36,10 @@ public class CodeExtractorServiceTest {
     @BeforeEach
     void setUp() throws IOException {
         // 创建一个临时目录作为源码根目录
-        tempDir = Files.createTempDirectory("test-source");
-
+        tempDir =Files.createTempDirectory(
+                Paths.get("target"),
+                "test-source");
+        System.out.println("created");
         // 模拟规则：只关注方法声明
         methodRule = new Rule();
         methodRule.setId("M001");

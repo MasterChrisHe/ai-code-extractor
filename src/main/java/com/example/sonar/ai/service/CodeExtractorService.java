@@ -1,5 +1,6 @@
 package com.example.sonar.ai.service;
 
+import com.example.sonar.ai.CodeAnalysisEngine;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.example.sonar.ai.parser.JavaCodeVisitor;
@@ -8,6 +9,8 @@ import com.github.javaparser.ast.CompilationUnit;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,8 +35,8 @@ public class CodeExtractorService {
         List<File> files = new ArrayList<>();
         try (Stream<Path> walk = Files.walk(Paths.get(sourceDir))) {
             walk.filter(Files::isRegularFile)
-                .filter(p -> p.toString().endsWith(".java"))
-                .forEach(p -> files.add(p.toFile()));
+                    .filter(p -> p.toString().endsWith(".java"))
+                    .forEach(p -> files.add(p.toFile()));
         } catch (IOException e) {
             System.err.println("ERROR: Failed to walk directory: " + e.getMessage());
         }
@@ -62,7 +65,7 @@ public class CodeExtractorService {
     public List<Snippet> extractAllCandidates() {
         List<Snippet> allCandidates = new ArrayList<>();
         List<File> javaFiles = findAllJavaFiles(sourceDir);
-        
+
         System.err.println("INFO: Found " + javaFiles.size() + " Java files.");
         System.err.println("INFO: Total rules to check: " + rules.size());
 
@@ -70,8 +73,21 @@ public class CodeExtractorService {
             Map<Rule, List<Snippet>> fileCandidates = parseFile(file);
             fileCandidates.values().forEach(allCandidates::addAll);
         }
-        
+
         System.err.println("INFO: Total candidates extracted: " + allCandidates.size());
         return allCandidates;
+    }
+
+    public void writeJsonToFile(String json) throws Exception {
+        //写入json文件
+        Path output = Paths.get(
+                System.getProperty("user.dir"),
+                "output.json"
+        );
+        System.out.println("json文件路径::" + output.toAbsolutePath());
+        Files.write(
+                output,
+                json.getBytes(StandardCharsets.UTF_8)
+        );
     }
 }
