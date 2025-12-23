@@ -76,17 +76,17 @@ public class CodeExtractorServiceTest {
         // 模拟一个包含注解的方法，确保行号正确
         String code = """
                 package com.test;
-                
+
                 import java.util.List; // Line 3
-                
+
                 public class UserService { // Line 5
-                    
+
                     @Override // Line 7
                     public List<String> getUserNames(String filter) { // Line 8
                         // 方法体
                         return List.of("A", "B");
                     }
-                    
+
                     private int getAge() { // Line 13
                         return 30;
                     }
@@ -117,15 +117,15 @@ public class CodeExtractorServiceTest {
 
         String code = """
                 package com.test; // Line 1
-                
+
                 /** JavaDoc */ // Line 3
                 @Deprecated // Line 4
                 public class MyClass { // Line 5
-                    
+
                 }
                 // comment // Line 8
                 final class AnotherClass { // Line 9
-                    
+
                 }
                 """;
 
@@ -143,6 +143,83 @@ public class CodeExtractorServiceTest {
         assertEquals("public class MyClass", c1.getCode());
     }
 
+    @Test
+    void testMethodJavadocExtraction() throws IOException {
+        // 配置 Javadoc 规则
+        Rule javadocRule = new Rule();
+        javadocRule.setScope("METHOD_JAVADOC");
+        testRules = Collections.singletonList(javadocRule);
+
+        String code = """
+                package com.test;
+
+                public class PaymentService {
+
+                    /**
+                     * Processes payment.
+                     * This explanation should be extracted.
+                     * @param amount The extraction amount
+                     */
+                    public void pay(double amount) { // Line 7 (Javadoc starts at 4)
+
+                    }
+
+                    /**
+                     *
+                     */
+                     public void skip() {} // Empty Javadoc should be skipped
+                }
+                """;
+
+        createTestFile("PaymentService.java", code);
+
+        CodeExtractorService service = new CodeExtractorService(tempDir.toString(), testRules);
+        List<Snippet> snippets = service.extractAllCandidates();
+
+        assertEquals(1, snippets.size(), "Should extract 1 Javadoc with summary");
+
+        Snippet s = snippets.get(0);
+        assertEquals("pay", s.getName());
+        assertTrue(s.getCode().contains("Processes payment.\nThis explanation should be extracted."),
+                "Should contain description");
+        assertFalse(s.getCode().contains("@param"), "Should exclude tags");
+        assertTrue(s.getCode().contains("public void pay(double amount)"), "Should contain signature");
+
+        // Javadoc start line is 5, but Summary "Processes payment." is on line 6
+        assertEquals(6, s.getLine(), "Should point to Javadoc Summary line");
+    }
+
+    @Test
+    void testClassJavadocExtraction() throws IOException {
+        Rule javadocRule = new Rule();
+        javadocRule.setScope("CLASS_JAVADOC");
+        testRules = Collections.singletonList(javadocRule);
+
+        String code = """
+                package com.test;
+
+                /**
+                 * Core utility class.
+                 * @author Admin
+                 */
+                public class Utils { // Line 5 (Javadoc starts at 3)
+                }
+                """;
+
+        createTestFile("Utils.java", code);
+
+        CodeExtractorService service = new CodeExtractorService(tempDir.toString(), testRules);
+        List<Snippet> snippets = service.extractAllCandidates();
+
+        assertEquals(1, snippets.size());
+        Snippet s = snippets.get(0);
+        assertEquals("Utils", s.getName());
+        assertTrue(s.getCode().contains("Core utility class."), "Should contain description");
+        assertTrue(s.getCode().contains("public class Utils"), "Should contain signature");
+        // Javadoc start line 3, Summary is line 4
+        assertEquals(4, s.getLine());
+    }
+
     /**
      * 测试 JSON 输出的格式和内容，模拟 CodeAnalysisEngine.main 的输出行为。
      */
@@ -151,9 +228,9 @@ public class CodeExtractorServiceTest {
         // 模拟源码
         String code = """
                 package com.test;
-                
+
                 public class Demo { // Line 3
-                    
+
                     @Override // Line 5
                     public void run() { // Line 6
                         // content
