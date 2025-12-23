@@ -1,4 +1,0 @@
-id,scope,description,criteria,context
-RULE-001,CLASS_DECLARATION,Extract class definitions,,
-RULE-002,METHOD_DECLARATION,Extract method definitions,,
-RULE-003,METHOD_JAVADOC,Extract method javadoc,,

@@ -26,12 +26,18 @@ public class JavadocStrategy implements ExtractionStrategy<BodyDeclaration<?>> {
 
     @Override
     public boolean supports(Rule rule, Node node) {
-        boolean isClassScope = "CLASS_JAVADOC".equalsIgnoreCase(rule.getScope());
-        boolean isMethodScope = "METHOD_JAVADOC".equalsIgnoreCase(rule.getScope());
+        boolean isLegacyClassScope = "CLASS_JAVADOC".equalsIgnoreCase(rule.getScope());
+        boolean isLegacyMethodScope = "METHOD_JAVADOC".equalsIgnoreCase(rule.getScope());
+        boolean isUnifiedScope = "JAVADOC".equalsIgnoreCase(rule.getScope());
 
-        if (isClassScope) {
+        if (isUnifiedScope) {
+            return node instanceof MethodDeclaration || node instanceof ClassOrInterfaceDeclaration
+                    || node instanceof EnumDeclaration;
+        }
+
+        if (isLegacyClassScope) {
             return node instanceof ClassOrInterfaceDeclaration || node instanceof EnumDeclaration;
-        } else if (isMethodScope) {
+        } else if (isLegacyMethodScope) {
             return node instanceof MethodDeclaration;
         }
         return false;

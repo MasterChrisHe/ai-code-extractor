@@ -147,7 +147,7 @@ public class CodeExtractorServiceTest {
     void testMethodJavadocExtraction() throws IOException {
         // 配置 Javadoc 规则
         Rule javadocRule = new Rule();
-        javadocRule.setScope("METHOD_JAVADOC");
+        javadocRule.setScope("JAVADOC");
         testRules = Collections.singletonList(javadocRule);
 
         String code = """
@@ -192,7 +192,7 @@ public class CodeExtractorServiceTest {
     @Test
     void testClassJavadocExtraction() throws IOException {
         Rule javadocRule = new Rule();
-        javadocRule.setScope("CLASS_JAVADOC");
+        javadocRule.setScope("JAVADOC");
         testRules = Collections.singletonList(javadocRule);
 
         String code = """
@@ -266,5 +266,53 @@ public class CodeExtractorServiceTest {
         // 将捕获到的 JSON 输出到原始 System.out，让用户在控制台看到
         originalOut.println("--- 模拟的 JSON 输出 ---");
         originalOut.println(jsonOutput);
+
+    }
+
+    @Test
+    void testClassJavadocExtraction_ScenarioUserReported() throws IOException {
+        Rule javadocRule = new Rule();
+        javadocRule.setScope("JAVADOC");
+        testRules = Collections.singletonList(javadocRule);
+
+        String code = """
+                package com.test;
+
+                /**
+                 * ceshilei
+                 *
+                 * @author chris
+                 * @date systemdate
+                 */
+                public class CeShiLei {
+
+                    /**
+                     * pencil
+                     */
+                    public void pencil() {
+                        System.out.println("Pencil");
+                    }
+                }
+                """;
+
+        createTestFile("CeShiLei.java", code);
+
+        CodeExtractorService service = new CodeExtractorService(tempDir.toString(), testRules);
+        List<Snippet> snippets = service.extractAllCandidates();
+
+        // With unified JAVADOC scope, both Class and Method Javadocs are extracted.
+        // 1. Class Javadoc ("ceshilei")
+        // 2. Method Javadoc ("pencil")
+        assertEquals(2, snippets.size(), "Should extract Class and Method Javadocs");
+
+        Snippet s = snippets.stream()
+                .filter(snip -> snip.getCode().contains("ceshilei"))
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Class Javadoc not found"));
+
+        System.out.println("Extracted Content: " + s.getCode());
+
+        assertTrue(s.getCode().contains("ceshilei"), "Should contain summary 'ceshilei'");
+        assertTrue(s.getCode().contains("public class CeShiLei"), "Should contain class signature");
     }
 }
