@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -36,10 +35,8 @@ public class CodeExtractorServiceTest {
     @BeforeEach
     void setUp() throws IOException {
         // 创建一个临时目录作为源码根目录
-        tempDir =Files.createTempDirectory(
-                Paths.get("target"),
-                "test-source");
-        System.out.println("created");
+        tempDir = Files.createTempDirectory("test-source");
+
         // 模拟规则：只关注方法声明
         methodRule = new Rule();
         methodRule.setId("M001");
@@ -190,6 +187,69 @@ public class CodeExtractorServiceTest {
 
         // Javadoc start line is 5, but Summary "Processes payment." is on line 6
         assertEquals(6, s.getLine(), "Should point to Javadoc Summary line");
+    }
+
+    @Test
+    void testMethodJavadocExtraction_withAccessModifiers() throws IOException {
+        // 验证只提取 public 和 protected 方法的 javadoc，不提取 private 和 package-private 方法
+        Rule javadocRule = new Rule();
+        javadocRule.setScope("JAVADOC");
+        testRules = Collections.singletonList(javadocRule);
+
+        String code = """
+                package com.test;
+
+                public class AccessModifierTest {
+
+                    /**
+                     * Public method javadoc - should be extracted
+                     */
+                    public void publicMethod() {
+                    }
+
+                    /**
+                     * Protected method javadoc - should be extracted
+                     */
+                    protected void protectedMethod() {
+                    }
+
+                    /**
+                     * Private method javadoc - should NOT be extracted
+                     */
+                    private void privateMethod() {
+                    }
+
+                    /**
+                     * Package-private method javadoc - should NOT be extracted
+                     */
+                    void packagePrivateMethod() {
+                    }
+                }
+                """;
+
+        createTestFile("AccessModifierTest.java", code);
+
+        CodeExtractorService service = new CodeExtractorService(tempDir.toString(), testRules);
+        List<Snippet> snippets = service.extractAllCandidates();
+
+        // Should only extract 2 javadocs: public and protected methods
+        assertEquals(2, snippets.size(), "Should extract only public and protected method javadocs");
+
+        // Verify public method javadoc is extracted
+        assertTrue(snippets.stream().anyMatch(s -> s.getName().equals("publicMethod")),
+                "Should extract public method javadoc");
+
+        // Verify protected method javadoc is extracted
+        assertTrue(snippets.stream().anyMatch(s -> s.getName().equals("protectedMethod")),
+                "Should extract protected method javadoc");
+
+        // Verify private method javadoc is NOT extracted
+        assertFalse(snippets.stream().anyMatch(s -> s.getName().equals("privateMethod")),
+                "Should NOT extract private method javadoc");
+
+        // Verify package-private method javadoc is NOT extracted
+        assertFalse(snippets.stream().anyMatch(s -> s.getName().equals("packagePrivateMethod")),
+                "Should NOT extract package-private method javadoc");
     }
 
     @Test

@@ -51,7 +51,15 @@ public class JavadocStrategy implements ExtractionStrategy<BodyDeclaration<?>> {
         Optional<Javadoc> javadocOpt = Optional.empty();
 
         if (node instanceof MethodDeclaration) {
-            javadocOpt = ((MethodDeclaration) node).getJavadoc();
+            MethodDeclaration method = (MethodDeclaration) node;
+            // Only extract javadoc for public and protected methods
+            // Skip private and package-private methods
+            if (method.isPublic() || method.isProtected()) {
+                javadocOpt = method.getJavadoc();
+            } else {
+                // Skip private and package-private methods
+                return;
+            }
         } else if (node instanceof ClassOrInterfaceDeclaration) {
             javadocOpt = ((ClassOrInterfaceDeclaration) node).getJavadoc();
         } else if (node instanceof EnumDeclaration) {
