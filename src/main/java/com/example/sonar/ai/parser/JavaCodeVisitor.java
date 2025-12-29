@@ -3,9 +3,11 @@ package com.example.sonar.ai.parser;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.example.sonar.ai.strategy.ExtractionStrategy;
+import com.example.sonar.ai.strategy.VariableDeclarationStrategy;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -33,6 +35,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
         this.strategies.add(new com.example.sonar.ai.strategy.ClassDeclarationStrategy());
         this.strategies.add(new com.example.sonar.ai.strategy.MethodDeclarationStrategy());
         this.strategies.add(new com.example.sonar.ai.strategy.JavadocStrategy());
+        this.strategies.add(new VariableDeclarationStrategy());
     }
 
     @Override
@@ -53,6 +56,13 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
         applyStrategies(n, collector);
     }
 
+    @Override
+    public void visit(VariableDeclarator n, Map<Rule, List<Snippet>> collector) {
+        super.visit(n, collector);
+        applyStrategies(n, collector);
+    }
+
+
     @SuppressWarnings("unchecked")
     private void applyStrategies(com.github.javaparser.ast.Node node, Map<Rule, List<Snippet>> collector) {
         collector.forEach((rule, snippets) -> {
@@ -67,7 +77,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
 
     @SuppressWarnings("unchecked")
     private <T extends com.github.javaparser.ast.Node> void executeStrategy(ExtractionStrategy<T> strategy,
-            com.github.javaparser.ast.Node node, Rule rule, File file, List<Snippet> snippets) {
+                                                                            com.github.javaparser.ast.Node node, Rule rule, File file, List<Snippet> snippets) {
         try {
             // Unchecked cast is necessary here as we essentially checked 'supports' before
             strategy.extract((T) node, rule, file, snippets);

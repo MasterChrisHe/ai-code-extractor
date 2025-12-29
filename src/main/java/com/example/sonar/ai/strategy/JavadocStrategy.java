@@ -164,7 +164,7 @@ public class JavadocStrategy implements ExtractionStrategy<BodyDeclaration<?>> {
             }
 
             String content = summary + "\n" + signature;
-            snippets.add(new Snippet(rule, file, line, content, name));
+            snippets.add(new Snippet(rule, file, line, content, name,"JAVADOC"));
         });
     }
 }

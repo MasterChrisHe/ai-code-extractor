@@ -8,6 +8,7 @@ import java.io.File;
  */
 public class Snippet {
     private String ruleId;
+    private String ruleScope;
     private String ruleDesc;
     private String ruleCriteria;
     private String ruleContext;
@@ -16,8 +17,9 @@ public class Snippet {
     private String code;
     private String name;
 
-    public Snippet(Rule rule, File file, int line, String code, String name) {
+    public Snippet(Rule rule, File file, int line, String code, String name,String scope) {
         this.ruleId = rule.getId();
+        this.ruleScope=scope;
         this.ruleDesc = rule.getDescription();
         this.ruleCriteria = rule.getCriteria();
         this.ruleContext = rule.getContext();

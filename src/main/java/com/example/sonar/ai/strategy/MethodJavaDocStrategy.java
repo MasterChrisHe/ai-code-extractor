@@ -4,6 +4,7 @@ import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.List;
@@ -15,7 +16,9 @@ public class MethodJavaDocStrategy implements ExtractionStrategy<MethodDeclarati
 
     @Override
     public boolean supports(Rule rule, Node node) {
-        return "METHOD_JAVADOC".equalsIgnoreCase(rule.getScope()) && node instanceof MethodDeclaration;
+        List<String> list =
+                List.of(StringUtils.split(rule.getScope(), ','));
+        return list.contains("METHOD_JAVADOC") && node instanceof MethodDeclaration;
     }
 
     @Override
@@ -29,7 +32,7 @@ public class MethodJavaDocStrategy implements ExtractionStrategy<MethodDeclarati
             String javadocContent = javadoc.getDescription().toText();
             // 如果 Javadoc 内容不为空，则提取
             if (javadocContent != null && !javadocContent.trim().isEmpty()) {
-                snippets.add(new Snippet(rule, file, line, javadocContent, node.getNameAsString()));
+                snippets.add(new Snippet(rule, file, line, javadocContent, node.getNameAsString(),"METHOD_JAVADOC"));
             }
         });
     }

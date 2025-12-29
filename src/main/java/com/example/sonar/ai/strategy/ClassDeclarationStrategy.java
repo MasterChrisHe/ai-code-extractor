@@ -6,8 +6,10 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +19,9 @@ public class ClassDeclarationStrategy implements ExtractionStrategy<TypeDeclarat
 
     @Override
     public boolean supports(Rule rule, Node node) {
-        return "CLASS_DECLARATION".equalsIgnoreCase(rule.getScope()) &&
+        List<String> list =
+                List.of(StringUtils.split(rule.getScope(), ','));
+        return list.contains("CLASS_DECLARATION") &&
                 (node instanceof ClassOrInterfaceDeclaration || node instanceof EnumDeclaration);
     }
 
@@ -49,6 +53,6 @@ public class ClassDeclarationStrategy implements ExtractionStrategy<TypeDeclarat
 
         sb.append(node.getNameAsString());
 
-        snippets.add(new Snippet(rule, file, line, sb.toString(), node.getNameAsString()));
+        snippets.add(new Snippet(rule, file, line, sb.toString(), node.getNameAsString(),"CLASS_DECLARATION"));
     }
 }

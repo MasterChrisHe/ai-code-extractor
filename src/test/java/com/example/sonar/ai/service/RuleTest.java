@@ -1,30 +1,21 @@
-package com.example.sonar.ai;
+package com.example.sonar.ai.service;
 
 import com.example.sonar.ai.io.RuleReader;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
-import com.example.sonar.ai.service.CodeExtractorService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.junit.jupiter.api.Test;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
 import java.util.List;
 
-/**
- * 主程序入口
- */
-public class CodeAnalysisEngine {
+public class RuleTest {
 
-    public static void main(String[] args) {
-        if (args.length != 2) {
-            System.err.println("Usage: java -jar ai-code-extractor.jar <sourceDir> <rulesFile>");
-            System.exit(1);
-        }
-        String sourceDir = args[0];
-        String rulesFile = args[1];
+    @Test
+    void test1() throws IOException {
+        String sourceDir = "E:\\softworkspace\\ai-code-extractor\\src\\main\\resources\\TestJavaCode.java";
+        String rulesFile = "E:\\softworkspace\\ai-code-extractor\\src\\main\\resources\\rules-test.yaml";
 
         System.err.println("INFO: Starting Code Analysis Engine...");
         System.err.println("INFO: Source Dir: " + sourceDir);
@@ -41,18 +32,18 @@ public class CodeAnalysisEngine {
 
             CodeExtractorService service = new CodeExtractorService(sourceDir, rules);
             List<Snippet> allCandidates = service.extractAllCandidates();
+
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-            String json = gson.toJson(allCandidates);
-            System.out.println("json::" + json);
+            // 注意：这是程序与外部 Groovy 脚本通信的唯一输出
+            System.out.println(gson.toJson(allCandidates));
+
             System.err.println("INFO: Extraction complete. JSON output finished.");
 
-            //输出字符串到json文件，与jar包同级
-            service.writeJsonToFile(json);
-            System.out.println("INFO: write json to json file completed");
         } catch (Exception e) {
             System.err.println("FATAL ERROR during extraction: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
         }
     }
+
 }

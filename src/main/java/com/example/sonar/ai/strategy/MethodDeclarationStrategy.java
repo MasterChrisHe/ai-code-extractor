@@ -4,6 +4,7 @@ import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.List;
@@ -15,7 +16,9 @@ public class MethodDeclarationStrategy implements ExtractionStrategy<MethodDecla
 
     @Override
     public boolean supports(Rule rule, Node node) {
-        return "METHOD_DECLARATION".equalsIgnoreCase(rule.getScope()) && node instanceof MethodDeclaration;
+        List<String> list =
+                List.of(StringUtils.split(rule.getScope(), ','));
+        return list.contains("METHOD_DECLARATION") && node instanceof MethodDeclaration;
     }
 
     @Override
@@ -25,6 +28,6 @@ public class MethodDeclarationStrategy implements ExtractionStrategy<MethodDecla
 
         String cleanCode = node.getDeclarationAsString(true, true, true);
 
-        snippets.add(new Snippet(rule, file, line, cleanCode, node.getNameAsString()));
+        snippets.add(new Snippet(rule, file, line, cleanCode, node.getNameAsString(),"METHOD_DECLARATION"));
     }
 }
