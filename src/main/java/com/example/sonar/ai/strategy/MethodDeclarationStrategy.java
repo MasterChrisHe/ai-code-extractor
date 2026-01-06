@@ -1,5 +1,8 @@
 package com.example.sonar.ai.strategy;
 
+import com.example.sonar.ai.handler.ExtractClassMethodVariableHandler;
+import com.example.sonar.ai.handler.ExtractMethodAndJavaDocHandler;
+import com.example.sonar.ai.handler.Handler;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.github.javaparser.ast.Node;
@@ -8,11 +11,22 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 方法声明抽取策略
  */
 public class MethodDeclarationStrategy implements ExtractionStrategy<MethodDeclaration> {
+
+    public MethodDeclarationStrategy() {
+        ExtractionStrategy.handlerMap.put("RULE-001", new ExtractClassMethodVariableHandler());
+        ExtractionStrategy.handlerMap.put("RULE-002", new ExtractClassMethodVariableHandler());
+        ExtractionStrategy.handlerMap.put("RULE-003", new ExtractClassMethodVariableHandler());
+        ExtractionStrategy.handlerMap.put("RULE-005", new ExtractMethodAndJavaDocHandler());
+        ExtractionStrategy.handlerMap.put("RULE-006", new ExtractMethodAndJavaDocHandler());
+        ExtractionStrategy.handlerMap.put("RULE-007", new ExtractMethodAndJavaDocHandler());
+        ExtractionStrategy.handlerMap.put("RULE-008", new ExtractMethodAndJavaDocHandler());
+    }
 
     @Override
     public boolean supports(Rule rule, Node node) {
@@ -23,11 +37,10 @@ public class MethodDeclarationStrategy implements ExtractionStrategy<MethodDecla
 
     @Override
     public void extract(MethodDeclaration node, Rule rule, File file, List<Snippet> snippets) {
-        int line = node.getName().getBegin().map(p -> p.line).orElse(
-                node.getBegin().map(p -> p.line).orElse(1));
-
-        String cleanCode = node.getDeclarationAsString(true, true, true);
-
-        snippets.add(new Snippet(rule, file, line, cleanCode, node.getNameAsString(),"METHOD_DECLARATION"));
+        ExtractionStrategy.handlerMap.forEach((ruleId, handler) -> {
+            if (ruleId.contains(rule.getId())) {
+                handler.extract(node, rule, file, snippets);
+            }
+        });
     }
 }

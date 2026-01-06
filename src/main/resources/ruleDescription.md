@@ -6,3 +6,15 @@ RULE-002
 
 RULE-003
 禁止不明含义的命名，使用完整单词组合来表达
+
+RULE-005
+查询业务: 使用getXxxx,getXxxxxByXxx命名；列表查询使用list/listByXxxx命名
+
+RULE-006
+新增业务: 使用insert/save命名
+
+RULE-007
+更新业务: 使用update/updateXxxXxx命名
+
+RULE-008
+删除业务: 使用remove/delete命名

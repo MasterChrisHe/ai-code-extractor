@@ -32,9 +32,9 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
         this.currentFile = file;
         this.strategies = new ArrayList<>();
         // 注册策略
+        // 每个策略中根据不同的抽取规则又做handler管理，以ruleid为唯一标识
         this.strategies.add(new com.example.sonar.ai.strategy.ClassDeclarationStrategy());
         this.strategies.add(new com.example.sonar.ai.strategy.MethodDeclarationStrategy());
-        this.strategies.add(new com.example.sonar.ai.strategy.JavadocStrategy());
         this.strategies.add(new VariableDeclarationStrategy());
     }
 

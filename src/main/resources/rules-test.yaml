@@ -1,19 +1,5 @@
-- ruleId: "RULE-001"
-  scope: "CLASS_DECLARATION,METHOD_DECLARATION,VARIABLE_DECLARATION"
-  ruleDesc: "Extract class definitions"
+- ruleId: "RULE-009"
+  scope: "CLASS_DECLARATION"
+  ruleDesc: "请求路径请保持表达完整清楚"
   ruleCriteria: ""
   ruleContext: ""
-
-#- ruleId: "RULE-002"
-#  scope: "METHOD_DECLARATION"
-#  ruleDesc: "Extract method definitions"
-#  ruleCriteria: ""
-#  ruleContext: ""
-#
-#- ruleId: "RULE-003"
-#  scope: "JAVADOC"
-#  ruleDesc: "Extract all Javadoc summaries (Class & Method)."
-#  ruleCriteria: "The Javadoc summary is empty, too short, or lacks info."
-#  ruleContext: |
-#    1. Allow getter/setter.
-#    2. Forbid 'test'.

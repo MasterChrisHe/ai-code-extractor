@@ -1,19 +1,48 @@
 - ruleId: "RULE-001"
-  scope: "CLASS_DECLARATION"
-  ruleDesc: "Extract class definitions"
+  scope: "CLASS_DECLARATION,METHOD_DECLARATION,VARIABLE_DECLARATION"
+  ruleDesc: "禁止使用拼音或拼音与英文混合方式命名"
   ruleCriteria: ""
   ruleContext: ""
 
 - ruleId: "RULE-002"
-  scope: "METHOD_DECLARATION"
-  ruleDesc: "Extract method definitions"
+  scope: "CLASS_DECLARATION,METHOD_DECLARATION,VARIABLE_DECLARATION"
+  ruleDesc: "禁止使用自定义英文缩写或过度缩写，请使用通用和大众认知的英文缩写"
   ruleCriteria: ""
   ruleContext: ""
 
 - ruleId: "RULE-003"
-  scope: "JAVADOC"
-  ruleDesc: "Extract all Javadoc summaries (Class & Method)."
-  ruleCriteria: "The Javadoc summary is empty, too short, or lacks info."
-  ruleContext: |
-    1. Allow getter/setter.
-    2. Forbid 'test'.
+  scope: "CLASS_DECLARATION,METHOD_DECLARATION,VARIABLE_DECLARATION"
+  ruleDesc: "禁止不明含义的命名，使用完整单词组合来表达"
+  ruleCriteria: ""
+  ruleContext: ""
+
+
+- ruleId: "RULE-005"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "查询业务：使用getXxxx,getXxxxxByXxx命名；列表查询使用list/listByXxxx命名"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-006"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "新增业务: 使用insert/save命名"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-007"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "更新业务: 使用update/updateXxxXxx命名"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-008"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "删除业务: 使用remove/delete命名"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-009"
+  scope: "CLASS_DECLARATION"
+  ruleDesc: "请求路径请保持表达完整清楚"
+  ruleCriteria: ""
+  ruleContext: ""
