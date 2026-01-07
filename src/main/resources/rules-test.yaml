@@ -1,5 +1,5 @@
-- ruleId: "RULE-029"
-  scope: "THREAD_DECLARATION"
-  ruleDesc: "创建线程或线程池时请指定有意义的线程名称，方便出错时回溯"
+- ruleId: "RULE-025"
+  scope: "THROW_DECLARATION"
+  ruleDesc: "主动抛出的异常必须要填写详细的描述信息"
   ruleCriteria: ""
   ruleContext: ""

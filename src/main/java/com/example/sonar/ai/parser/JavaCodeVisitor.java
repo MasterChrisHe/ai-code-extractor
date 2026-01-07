@@ -4,6 +4,7 @@ import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.example.sonar.ai.strategy.ExtractionStrategy;
 import com.example.sonar.ai.strategy.ThreadDeclarationStrategy;
+import com.example.sonar.ai.strategy.ThrowDeclarationStrategy;
 import com.example.sonar.ai.strategy.VariableDeclarationStrategy;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.EnumDeclaration;
@@ -11,6 +12,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import com.github.javaparser.ast.stmt.ThrowStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import java.io.File;
@@ -37,6 +39,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
         this.strategies.add(new com.example.sonar.ai.strategy.MethodDeclarationStrategy());
         this.strategies.add(new VariableDeclarationStrategy());
         this.strategies.add(new ThreadDeclarationStrategy());
+        this.strategies.add(new ThrowDeclarationStrategy());
     }
 
     @Override
@@ -71,6 +74,12 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
 
     @Override
     public void visit(MethodCallExpr n, Map<Rule, List<Snippet>> collector) {
+        super.visit(n, collector);
+        applyStrategies(n, collector);
+    }
+
+    @Override
+    public void visit(ThrowStmt n, Map<Rule, List<Snippet>> collector) {
         super.visit(n, collector);
         applyStrategies(n, collector);
     }
