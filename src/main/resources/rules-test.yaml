@@ -1,5 +1,5 @@
-- ruleId: "RULE-025"
-  scope: "THROW_DECLARATION"
-  ruleDesc: "主动抛出的异常必须要填写详细的描述信息"
+- ruleId: "RULE-021"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "动词+宾语（）"
   ruleCriteria: ""
   ruleContext: ""

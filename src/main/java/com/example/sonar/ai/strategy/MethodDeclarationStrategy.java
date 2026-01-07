@@ -28,6 +28,9 @@ public class MethodDeclarationStrategy implements ExtractionStrategy<MethodDecla
         ExtractionStrategy.handlerMap.put("RULE-008", new ExtractMethodAndJavaDocHandler());
         ExtractionStrategy.handlerMap.put("RULE-012", new ExtractClassMethodVariableHandler());
         ExtractionStrategy.handlerMap.put("RULE-013", new ExtractClassMethodVariableHandler());
+        ExtractionStrategy.handlerMap.put("RULE-017", new ExtractClassMethodVariableHandler());
+        ExtractionStrategy.handlerMap.put("RULE-020", new ExtractClassMethodVariableHandler());
+        ExtractionStrategy.handlerMap.put("RULE-021", new ExtractClassMethodVariableHandler());
     }
 
     @Override

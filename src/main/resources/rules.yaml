@@ -65,6 +65,24 @@
   ruleCriteria: ""
   ruleContext: ""
 
+- ruleId: "RULE-017"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "动作方法采用动词和动宾结构，要具有清晰的表意，准确描述方法的功能"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-020"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "动词（）"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-021"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "动词+宾语（）"
+  ruleCriteria: ""
+  ruleContext: ""
+
 - ruleId: "RULE-025"
   scope: "THROW_DECLARATION"
   ruleDesc: "主动抛出的异常必须要填写详细的描述信息"
