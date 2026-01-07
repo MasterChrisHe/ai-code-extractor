@@ -4,7 +4,6 @@ import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.comments.Comment;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.List;

@@ -3,20 +3,20 @@ package com.example.sonar.ai.parser;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.example.sonar.ai.strategy.ExtractionStrategy;
+import com.example.sonar.ai.strategy.ThreadDeclarationStrategy;
 import com.example.sonar.ai.strategy.VariableDeclarationStrategy;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
-import com.github.javaparser.ast.comments.Comment;
-import com.github.javaparser.ast.stmt.*;
+import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import java.io.File;
-import java.util.ArrayList; // Add ArrayList import
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * AST 访问器
@@ -36,6 +36,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
         this.strategies.add(new com.example.sonar.ai.strategy.ClassDeclarationStrategy());
         this.strategies.add(new com.example.sonar.ai.strategy.MethodDeclarationStrategy());
         this.strategies.add(new VariableDeclarationStrategy());
+        this.strategies.add(new ThreadDeclarationStrategy());
     }
 
     @Override
@@ -58,6 +59,18 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
 
     @Override
     public void visit(VariableDeclarator n, Map<Rule, List<Snippet>> collector) {
+        super.visit(n, collector);
+        applyStrategies(n, collector);
+    }
+
+    @Override
+    public void visit(ObjectCreationExpr n, Map<Rule, List<Snippet>> collector) {
+        super.visit(n, collector);
+        applyStrategies(n, collector);
+    }
+
+    @Override
+    public void visit(MethodCallExpr n, Map<Rule, List<Snippet>> collector) {
         super.visit(n, collector);
         applyStrategies(n, collector);
     }

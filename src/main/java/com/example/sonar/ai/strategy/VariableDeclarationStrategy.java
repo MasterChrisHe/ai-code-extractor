@@ -22,6 +22,7 @@ public class VariableDeclarationStrategy implements ExtractionStrategy<VariableD
         ExtractionStrategy.handlerMap.put("RULE-001", new ExtractClassMethodVariableHandler());
         ExtractionStrategy.handlerMap.put("RULE-002", new ExtractClassMethodVariableHandler());
         ExtractionStrategy.handlerMap.put("RULE-003", new ExtractClassMethodVariableHandler());
+        ExtractionStrategy.handlerMap.put("RULE-011", new ExtractClassMethodVariableHandler());
     }
 
 

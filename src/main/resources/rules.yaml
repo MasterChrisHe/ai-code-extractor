@@ -46,3 +46,29 @@
   ruleDesc: "请求路径请保持表达完整清楚"
   ruleCriteria: ""
   ruleContext: ""
+
+- ruleId: "RULE-011"
+  scope: "VARIABLE_DECLARATION"
+  ruleDesc: "变量名应具有描述性，能清晰地表达其代表的含义，以便提高代码和可读性和可维护性。例如，用studentName表示学生姓名，而不是用诸如a这样含义模糊的名称"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-012"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "方法名应该是有意义的动词或动宾短语，清晰地表达方法的功能，如calculateSum、processData"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-013"
+  scope: "CLASS_DECLARATION,METHOD_DECLARATION,VARIABLE_DECLARATION"
+  ruleDesc: "代码中的命名严禁使用拼音与英文混合的方式"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-029"
+  scope: "THREAD_DECLARATION"
+  ruleDesc: "创建线程或线程池时请指定有意义的线程名称，方便出错时回溯"
+  ruleCriteria: ""
+  ruleContext: ""
+
+

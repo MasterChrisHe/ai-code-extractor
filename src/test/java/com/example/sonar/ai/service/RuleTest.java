@@ -14,7 +14,7 @@ public class RuleTest {
 
     @Test
     void test1() throws IOException {
-        String sourceDir = "E:\\softworkspace\\ai-code-extractor\\src\\main\\resources\\TestController.java";
+        String sourceDir = "E:\\softworkspace\\ai-code-extractor\\src\\main\\resources\\TestThread.java";
         String rulesFile = "E:\\softworkspace\\ai-code-extractor\\src\\main\\resources\\rules-test.yaml";
 
         System.err.println("INFO: Starting Code Analysis Engine...");
