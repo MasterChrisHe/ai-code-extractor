@@ -2,6 +2,7 @@ package com.example.sonar.ai.strategy;
 
 import com.example.sonar.ai.handler.ExtractClassMethodVariableHandler;
 import com.example.sonar.ai.handler.ExtractListLoopHandler;
+import com.example.sonar.ai.handler.ExtractLoopHander;
 import com.example.sonar.ai.handler.ExtractMethodAndJavaDocHandler;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
@@ -32,6 +33,7 @@ public class MethodDeclarationStrategy implements ExtractionStrategy<MethodDecla
         ExtractionStrategy.handlerMap.put("RULE-020", new ExtractClassMethodVariableHandler());
         ExtractionStrategy.handlerMap.put("RULE-021", new ExtractClassMethodVariableHandler());
         ExtractionStrategy.handlerMap.put("RULE-027", new ExtractListLoopHandler());
+        ExtractionStrategy.handlerMap.put("RULE-028", new ExtractLoopHander());
     }
 
     @Override

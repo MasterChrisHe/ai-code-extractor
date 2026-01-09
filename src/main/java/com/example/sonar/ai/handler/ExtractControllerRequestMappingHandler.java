@@ -2,7 +2,6 @@ package com.example.sonar.ai.handler;
 
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.*;
