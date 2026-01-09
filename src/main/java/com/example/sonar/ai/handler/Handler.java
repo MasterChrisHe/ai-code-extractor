@@ -3,9 +3,7 @@ package com.example.sonar.ai.handler;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
-import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.stmt.ThrowStmt;
@@ -26,6 +24,18 @@ public abstract class Handler {
      */
     public void extract(Node node, Rule rule, File file, List<Snippet> snippets) {
         throw new UnsupportedOperationException("Node extraction not implemented yet");
+    }
+
+    /**
+     * 对类或接口操作
+     *
+     * @param node
+     * @param rule
+     * @param file
+     * @param snippets
+     */
+    public void extract(ClassOrInterfaceDeclaration node, Rule rule, File file, List<Snippet> snippets) {
+        throw new UnsupportedOperationException("ClassOrInterfaceDeclaration extraction not implemented yet");
     }
 
     /**
@@ -99,5 +109,17 @@ public abstract class Handler {
      */
     public void extract(ThrowStmt node, Rule rule, File file, List<Snippet> snippets) {
         throw new UnsupportedOperationException("ThrowStmt extraction not implemented yet");
+    }
+
+    /**
+     * 成员变量
+     *
+     * @param node
+     * @param rule
+     * @param file
+     * @param snippets
+     */
+    public void extract(FieldDeclaration node, Rule rule, File file, List<Snippet> snippets) {
+        throw new UnsupportedOperationException("FieldDeclaration extraction not implemented yet");
     }
 }

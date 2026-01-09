@@ -14,6 +14,10 @@ import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * 抽取主动抛出异常的message。 适用的规则ruleId如下，具体规则请看ruleDescription.md：
+ * RULE-024
+ */
 public class ExtractThrowHandler extends Handler {
 
     @Override

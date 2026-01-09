@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -107,7 +108,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     }
 
     private void abc(){
-
+        List<String> list=new ArrayList<>();
+        for(int i=0;i<5;i++){
+            if (list.contains("abc")) {
+                System.out.println("111");
+            }
+        }
     }
 
 }

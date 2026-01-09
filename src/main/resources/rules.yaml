@@ -65,9 +65,27 @@
   ruleCriteria: ""
   ruleContext: ""
 
+- ruleId: "RULE-015"
+  scope: "CLASS_DECLARATION,METHOD_DECLARATION,VARIABLE_DECLARATION"
+  ruleDesc: "杜绝完全不规范的缩写，避免望文不知义。为了达到代码自解释的目标，任何自定义变成元素在命名时，使用尽量完整的单词组合来表达其意"
+  ruleCriteria: ""
+  ruleContext: ""
+
 - ruleId: "RULE-017"
   scope: "METHOD_DECLARATION"
   ruleDesc: "动作方法采用动词和动宾结构，要具有清晰的表意，准确描述方法的功能"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-018"
+  scope: "FIELD_DECLARATION"
+  ruleDesc: "get+非布尔属性名()"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-019"
+  scope: "FIELD_DECLARATION"
+  ruleDesc: "set+属性名()"
   ruleCriteria: ""
   ruleContext: ""
 
@@ -86,6 +104,12 @@
 - ruleId: "RULE-025"
   scope: "THROW_DECLARATION"
   ruleDesc: "主动抛出的异常必须要填写详细的描述信息"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-027"
+  scope: "METHOD_DECLARATION"
+  ruleDesc: "利用Set元素唯一的特性，可以快速对一个集合进行去重操作，避免使用List的contains()进行遍历去重或判断包含操作"
   ruleCriteria: ""
   ruleContext: ""
 

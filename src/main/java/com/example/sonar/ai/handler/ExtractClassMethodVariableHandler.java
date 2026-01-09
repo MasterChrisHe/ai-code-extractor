@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 抽取类，方法，变量名。 适用的规则ruleId如下，具体规则请看ruleDescription.md：
- * RULE-001,RULE-002,RULE-003
+ * RULE-001,RULE-002,RULE-003,RULE-012,RULE-013,RULE-017,RULE-020,RULE-021
  */
 public class ExtractClassMethodVariableHandler extends Handler {
 

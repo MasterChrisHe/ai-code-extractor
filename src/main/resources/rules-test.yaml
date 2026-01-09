@@ -1,5 +1,5 @@
-- ruleId: "RULE-021"
+- ruleId: "RULE-027"
   scope: "METHOD_DECLARATION"
-  ruleDesc: "动词+宾语（）"
+  ruleDesc: "利用Set元素唯一的特性，可以快速对一个集合进行去重操作，避免使用List的contains()进行遍历去重或判断包含操作"
   ruleCriteria: ""
   ruleContext: ""

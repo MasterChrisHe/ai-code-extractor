@@ -2,6 +2,19 @@
 @RequestMapping("/api/user")
 public class UserController {
 
+    private String abc;
+
+    @Resource
+    private UserService userService;
+
+    public void bcas(String abc) {
+        this.abc = abc;
+    }
+
+    public String wbj() {
+        return abc;
+    }
+
     @GetMapping("/list")
     public List<User> list() {}
 
