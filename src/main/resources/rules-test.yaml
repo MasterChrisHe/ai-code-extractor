@@ -1,5 +1,5 @@
-- ruleId: "RULE-028"
-  scope: "METHOD_DECLARATION"
-  ruleDesc: "循环体中的语句要考虑性能，以下操作尽量移至循环体外处理，如定义对象、遍历、获取数据库连接，进行不必要的try-catch操作"
+- ruleId: "RULE-022"
+  scope: "CLASS_DECLARATION"
+  ruleDesc: "类属性和类方法不要交叉放置，不同存取范围的属性或者方法也尽量不要交叉放置"
   ruleCriteria: ""
   ruleContext: ""

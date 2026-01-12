@@ -101,6 +101,12 @@
   ruleCriteria: ""
   ruleContext: ""
 
+- ruleId: "RULE-022"
+  scope: "CLASS_DECLARATION"
+  ruleDesc: "类属性和类方法不要交叉放置，不同存取范围的属性或者方法也尽量不要交叉放置"
+  ruleCriteria: ""
+  ruleContext: ""
+
 - ruleId: "RULE-025"
   scope: "THROW_DECLARATION"
   ruleDesc: "主动抛出的异常必须要填写详细的描述信息"
