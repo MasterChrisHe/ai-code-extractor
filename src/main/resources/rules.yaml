@@ -47,6 +47,12 @@
   ruleCriteria: ""
   ruleContext: ""
 
+- ruleId: "RULE-010"
+  scope: "CLASS_DECLARATION"
+  ruleDesc: "一个类有多个构造函数，或是多个同名方法，这些方法应该按顺序出现在一起，中间不要放进其他方法"
+  ruleCriteria: ""
+  ruleContext: ""
+
 - ruleId: "RULE-011"
   scope: "VARIABLE_DECLARATION"
   ruleDesc: "变量名应具有描述性，能清晰地表达其代表的含义，以便提高代码和可读性和可维护性。例如，用studentName表示学生姓名，而不是用诸如a这样含义模糊的名称"
@@ -62,6 +68,12 @@
 - ruleId: "RULE-013"
   scope: "CLASS_DECLARATION,METHOD_DECLARATION,VARIABLE_DECLARATION"
   ruleDesc: "代码中的命名严禁使用拼音与英文混合的方式"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-014"
+  scope: "CLASS_DECLARATION"
+  ruleDesc: "尽量不要在接口里定义变量，如果一定要定义变量，肯定与接口方法相关，并且是整个应用的基础常量"
   ruleCriteria: ""
   ruleContext: ""
 

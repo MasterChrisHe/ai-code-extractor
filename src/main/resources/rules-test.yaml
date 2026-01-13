@@ -1,5 +1,5 @@
-- ruleId: "RULE-022"
+- ruleId: "RULE-010"
   scope: "CLASS_DECLARATION"
-  ruleDesc: "类属性和类方法不要交叉放置，不同存取范围的属性或者方法也尽量不要交叉放置"
+  ruleDesc: "一个类有多个构造函数，或是多个同名方法，这些方法应该按顺序出现在一起，中间不要放进其他方法"
   ruleCriteria: ""
   ruleContext: ""

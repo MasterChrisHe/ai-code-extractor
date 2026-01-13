@@ -1,8 +1,6 @@
 package com.example.sonar.ai.strategy;
 
-import com.example.sonar.ai.handler.ExtractClassMethodFieldHandler;
-import com.example.sonar.ai.handler.ExtractClassMethodVariableHandler;
-import com.example.sonar.ai.handler.ExtractControllerRequestMappingHandler;
+import com.example.sonar.ai.handler.*;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
 import com.github.javaparser.ast.Node;
@@ -24,6 +22,8 @@ public class ClassDeclarationStrategy implements ExtractionStrategy<TypeDeclarat
         ExtractionStrategy.handlerMap.put("RULE-002", new ExtractClassMethodVariableHandler());
         ExtractionStrategy.handlerMap.put("RULE-003", new ExtractClassMethodVariableHandler());
         ExtractionStrategy.handlerMap.put("RULE-009", new ExtractControllerRequestMappingHandler());
+        ExtractionStrategy.handlerMap.put("RULE-010", new ExtractClassContructionOverrideHandler());
+        ExtractionStrategy.handlerMap.put("RULE-014", new ExtractInterfaceFieldHandler());
         ExtractionStrategy.handlerMap.put("RULE-015", new ExtractClassMethodVariableHandler());
         ExtractionStrategy.handlerMap.put("RULE-022", new ExtractClassMethodFieldHandler());
     }
