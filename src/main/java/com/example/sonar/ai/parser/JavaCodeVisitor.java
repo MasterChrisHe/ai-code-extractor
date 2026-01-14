@@ -6,6 +6,7 @@ import com.example.sonar.ai.strategy.*;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import com.github.javaparser.ast.stmt.SynchronizedStmt;
 import com.github.javaparser.ast.stmt.ThrowStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
@@ -35,6 +36,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
         this.strategies.add(new ThreadDeclarationStrategy());
         this.strategies.add(new ThrowDeclarationStrategy());
         this.strategies.add(new FieldDeclarationStrategy());
+        this.strategies.add(new LockDeclarationStrategy());
     }
 
     @Override
@@ -81,6 +83,12 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
 
     @Override
     public void visit(FieldDeclaration n, Map<Rule, List<Snippet>> collector) {
+        super.visit(n, collector);
+        applyStrategies(n, collector);
+    }
+
+    @Override
+    public void visit(SynchronizedStmt n, Map<Rule, List<Snippet>> collector) {
         super.visit(n, collector);
         applyStrategies(n, collector);
     }

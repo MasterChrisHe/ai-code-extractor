@@ -1,5 +1,5 @@
-- ruleId: "RULE-010"
-  scope: "CLASS_DECLARATION"
-  ruleDesc: "一个类有多个构造函数，或是多个同名方法，这些方法应该按顺序出现在一起，中间不要放进其他方法"
+- ruleId: "RULE-030"
+  scope: "LOCK_DECLARATION"
+  ruleDesc: "高并发时，同步调用应该去考量锁的性能损耗。能用无所数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁"
   ruleCriteria: ""
   ruleContext: ""
