@@ -1,0 +1,5 @@
+- ruleId: "RULE-001"
+  scope: "CLASS_DECLARATION,METHOD_DECLARATION,VARIABLE_DECLARATION"
+  ruleDesc: >
+   禁止使用拼音或拼音与英文混合方式命名
+  ruleContext: ""

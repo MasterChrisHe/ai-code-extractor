@@ -39,7 +39,7 @@ public class CodeExtractorServiceTest {
 
         // 模拟规则：只关注方法声明
         methodRule = new Rule();
-        methodRule.setId("M001");
+        methodRule.setId("RULE-001");
         methodRule.setScope("METHOD_DECLARATION");
         methodRule.setDescription("Method Name Check");
         methodRule.setCriteria("Method name must follow camelCase.");
@@ -111,6 +111,7 @@ public class CodeExtractorServiceTest {
     void testClassDeclarationExtraction() throws IOException {
         // 改变规则，测试类提取
         Rule classRule = new Rule();
+        classRule.setId("RULE-001");
         classRule.setScope("CLASS_DECLARATION");
         // 替换规则列表
         testRules = Collections.singletonList(classRule);
@@ -185,8 +186,8 @@ public class CodeExtractorServiceTest {
         assertFalse(s.getCode().contains("@param"), "Should exclude tags");
         assertTrue(s.getCode().contains("public void pay(double amount)"), "Should contain signature");
 
-        // Javadoc start line is 5, but Summary "Processes payment." is on line 6
-        assertEquals(6, s.getLine(), "Should point to Javadoc Summary line");
+        // Historical JavadocStrategy points to the Summary line (line 6)
+        assertEquals(6, s.getLine(), "Should point to Javadoc start line");
     }
 
     @Test
@@ -279,8 +280,8 @@ public class CodeExtractorServiceTest {
         assertEquals("Utils", s.getName());
         assertTrue(s.getCode().contains("Core utility class."), "Should contain description");
         assertTrue(s.getCode().contains("public class Utils"), "Should contain signature");
-        // Javadoc start line 3, Summary is line 4
-        assertEquals(4, s.getLine());
+        // Historical JavadocStrategy points to the Summary line (line 4)
+        assertEquals(4, s.getLine(), "Should point to Javadoc start line");
     }
 
     /**

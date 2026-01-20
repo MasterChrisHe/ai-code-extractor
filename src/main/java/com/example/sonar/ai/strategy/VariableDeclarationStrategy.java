@@ -9,6 +9,8 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.Expression;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.stream.Stream;
+
 import java.io.File;
 import java.util.List;
 import java.util.Set;
@@ -26,11 +28,11 @@ public class VariableDeclarationStrategy implements ExtractionStrategy<VariableD
         ExtractionStrategy.handlerMap.put("RULE-015", new ExtractClassMethodVariableHandler());
     }
 
-
     @Override
     public boolean supports(Rule rule, Node node) {
-        List<String> list =
-                List.of(StringUtils.split(rule.getScope(), ','));
+        List<String> list = Stream.of(StringUtils.split(rule.getScope(), ','))
+                .map(String::trim)
+                .toList();
         return list.contains("VARIABLE_DECLARATION") &&
                 (node instanceof VariableDeclarator);
     }

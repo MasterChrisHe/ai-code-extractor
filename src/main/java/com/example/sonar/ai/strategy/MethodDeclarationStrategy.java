@@ -10,6 +10,8 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.stream.Stream;
+
 import java.io.File;
 import java.util.List;
 
@@ -38,8 +40,9 @@ public class MethodDeclarationStrategy implements ExtractionStrategy<MethodDecla
 
     @Override
     public boolean supports(Rule rule, Node node) {
-        List<String> list =
-                List.of(StringUtils.split(rule.getScope(), ','));
+        List<String> list = Stream.of(StringUtils.split(rule.getScope(), ','))
+                .map(String::trim)
+                .toList();
         return list.contains("METHOD_DECLARATION") && node instanceof MethodDeclaration;
     }
 

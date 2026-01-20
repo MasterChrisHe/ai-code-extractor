@@ -9,6 +9,8 @@ import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.stream.Stream;
+
 import java.io.File;
 import java.util.List;
 
@@ -30,15 +32,16 @@ public class ClassDeclarationStrategy implements ExtractionStrategy<TypeDeclarat
 
     @Override
     public boolean supports(Rule rule, Node node) {
-        List<String> list =
-                List.of(StringUtils.split(rule.getScope(), ','));
+        List<String> list = Stream.of(StringUtils.split(rule.getScope(), ','))
+                .map(String::trim)
+                .toList();
         return list.contains("CLASS_DECLARATION") &&
                 (node instanceof ClassOrInterfaceDeclaration || node instanceof EnumDeclaration);
     }
 
     @Override
     public void extract(TypeDeclaration<?> node, Rule rule, File file, List<Snippet> snippets) {
-        //遍历初始化中已添加的处理器
+        // 遍历初始化中已添加的处理器
         ExtractionStrategy.handlerMap.forEach((ruleId, handler) -> {
             if (ruleId.contains(rule.getId())) {
                 handler.extract(node, rule, file, snippets);

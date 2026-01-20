@@ -43,12 +43,12 @@ public class CodeAnalysisEngine {
             List<Snippet> allCandidates = service.extractAllCandidates();
             Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
             String json = gson.toJson(allCandidates);
-            System.out.println("json::" + json);
+            System.out.println(json);
             System.err.println("INFO: Extraction complete. JSON output finished.");
 
-            //输出字符串到json文件，与jar包同级
+            // 输出字符串到json文件，与jar包同级
             service.writeJsonToFile(json);
-            System.out.println("INFO: write json to json file completed");
+            System.err.println("INFO: write json to json file completed");
         } catch (Exception e) {
             System.err.println("FATAL ERROR during extraction: " + e.getMessage());
             e.printStackTrace();

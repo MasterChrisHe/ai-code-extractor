@@ -1,0 +1,6 @@
+rules:
+  - ruleId: "RULE-JAVADOC"
+    scope: "JAVADOC"
+    description: "Extract Javadoc"
+    criteria: "Extract all public/protected javadocs"
+    context: "Documentation"
