@@ -1,5 +1,5 @@
-- ruleId: "RULE-030"
-  scope: "LOCK_DECLARATION"
-  ruleDesc: "高并发时，同步调用应该去考量锁的性能损耗。能用无所数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁"
+- ruleId: "RULE-031"
+  scope: "LOG_DECLARATION"
+  ruleDesc: "可以使用warn日志级别来记录用户输入参数错误的情况，避免用户投诉时，无所适从。注意日志输出的级别，error级别只记录系统逻辑出错、异常等重要的错误信息"
   ruleCriteria: ""
   ruleContext: ""
