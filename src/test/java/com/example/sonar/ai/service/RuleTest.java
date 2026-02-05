@@ -36,6 +36,7 @@ public class RuleTest {
                         List<Snippet> allCandidates = service.extractAllCandidates();
 
                         Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+                        // 注意：这是程序与外部 Groovy 脚本通信的唯一输出
                         System.out.println(gson.toJson(allCandidates));
 
                         System.err.println("INFO: Extraction complete. JSON output finished.");
@@ -43,6 +44,7 @@ public class RuleTest {
                 } catch (Exception e) {
                         System.err.println("FATAL ERROR during extraction: " + e.getMessage());
                         e.printStackTrace();
+                        System.exit(1);
                 }
         }
 

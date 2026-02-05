@@ -149,3 +149,8 @@
   ruleCriteria: ""
   ruleContext: ""
 
+- ruleId: "RULE-031"
+  scope: "LOG_DECLARATION"
+  ruleDesc: "可以使用warn日志级别来记录用户输入参数错误的情况，避免用户投诉时，无所适从。注意日志输出的级别，error级别只记录系统逻辑出错、异常等重要的错误信息"
+  ruleCriteria: ""
+  ruleContext: ""
