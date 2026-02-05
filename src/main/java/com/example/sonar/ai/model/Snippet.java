@@ -17,9 +17,9 @@ public class Snippet {
     private String code;
     private String name;
 
-    public Snippet(Rule rule, File file, int line, String code, String name,String scope) {
+    public Snippet(Rule rule, File file, int line, String code, String name, String scope) {
         this.ruleId = rule.getId();
-        this.ruleScope=scope;
+        this.ruleScope = scope;
         this.ruleDesc = rule.getDescription();
         this.ruleCriteria = rule.getCriteria();
         this.ruleContext = rule.getContext();
@@ -28,9 +28,21 @@ public class Snippet {
         this.code = code;
         this.name = name;
     }
-    
+
     // 仅为测试添加 Getter
-    public String getName() { return name; }
-    public int getLine() { return line; }
-    public String getCode() { return code; }
+    public String getName() {
+        return name;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getScope() {
+        return ruleScope;
+    }
 }

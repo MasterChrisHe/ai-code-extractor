@@ -2,6 +2,7 @@ package com.example.sonar.ai.handler;
 
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
+import com.example.sonar.ai.util.NameTokenizer;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.Expression;
 
@@ -37,7 +38,12 @@ public class ExtractClassMethodVariableHandler extends Handler {
             sb.append("enum ");
         }
         sb.append(node.getNameAsString());
-        snippets.add(new Snippet(rule, file, line, sb.toString(), node.getNameAsString(), "CLASS_DECLARATION"));
+
+        // 追加命名拆分 tokens（仅对 CLASS_DECLARATION 生效）
+        String codeWithTokens = sb.toString() + "\n"
+                + NameTokenizer.formatTokens(NameTokenizer.tokenize(node.getNameAsString()));
+
+        snippets.add(new Snippet(rule, file, line, codeWithTokens, node.getNameAsString(), "CLASS_DECLARATION"));
     }
 
     @Override
@@ -45,7 +51,12 @@ public class ExtractClassMethodVariableHandler extends Handler {
         int line = node.getName().getBegin().map(p -> p.line).orElse(
                 node.getBegin().map(p -> p.line).orElse(1));
         String cleanCode = node.getDeclarationAsString(true, true, true);
-        snippets.add(new Snippet(rule, file, line, cleanCode, node.getNameAsString(), "METHOD_DECLARATION"));
+
+        // 追加命名拆分 tokens（仅对 METHOD_DECLARATION 生效）
+        String codeWithTokens = cleanCode + "\n"
+                + NameTokenizer.formatTokens(NameTokenizer.tokenize(node.getNameAsString()));
+
+        snippets.add(new Snippet(rule, file, line, codeWithTokens, node.getNameAsString(), "METHOD_DECLARATION"));
     }
 
     @Override
@@ -60,6 +71,11 @@ public class ExtractClassMethodVariableHandler extends Handler {
         String result = initializer == null
                 ? type + " " + name
                 : type + " " + name + " = " + initializer;
-        snippets.add(new Snippet(rule, file, line, result, node.getNameAsString(), "VARIABLE_DECLARATION"));
+
+        // 追加命名拆分 tokens（仅对 VARIABLE_DECLARATION 生效）
+        String codeWithTokens = result + "\n"
+                + NameTokenizer.formatTokens(NameTokenizer.tokenize(node.getNameAsString()));
+
+        snippets.add(new Snippet(rule, file, line, codeWithTokens, node.getNameAsString(), "VARIABLE_DECLARATION"));
     }
 }
