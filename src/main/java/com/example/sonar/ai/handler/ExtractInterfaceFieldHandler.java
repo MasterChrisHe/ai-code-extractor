@@ -34,7 +34,6 @@ public class ExtractInterfaceFieldHandler extends Handler {
                     sb.append("class ");
                 }
                 sb.append(iface.getNameAsString());
-                var methods = iface.getMethods();
                 iface.getMembers().stream()
                         .filter(m -> m instanceof FieldDeclaration)
                         .map(m -> (FieldDeclaration) m)

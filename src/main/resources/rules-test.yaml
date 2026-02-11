@@ -1,5 +1,5 @@
-- ruleId: "RULE-023"
-  scope: "LONGSTATEMENT_DECLARATION"
-  ruleDesc: "较长的语句、表达式或参数大于80字符时要分成多行书写，长表达式要在低优先级操作符处划分新行，操作符放在新行之首"
+- ruleId: "RULE-026"
+  scope: "FIELD_DECLARATION"
+  ruleDesc: "使用有意义的标识，避免使用不易理解的数字，用有意义的标识来替代。涉及物理状态或含有物理意义的常量，不应直接使用数字，必须用有意义的静态变量来代替"
   ruleCriteria: ""
   ruleContext: ""

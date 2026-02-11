@@ -1,5 +1,6 @@
 package com.example.sonar.ai.strategy;
 
+import com.example.sonar.ai.handler.ExtractConstantHandler;
 import com.example.sonar.ai.handler.ExtractFieldHandler;
 import com.example.sonar.ai.model.Rule;
 import com.example.sonar.ai.model.Snippet;
@@ -15,6 +16,7 @@ public class FieldDeclarationStrategy implements ExtractionStrategy<FieldDeclara
     public FieldDeclarationStrategy() {
         ExtractionStrategy.handlerMap.put("RULE-018", new ExtractFieldHandler());
         ExtractionStrategy.handlerMap.put("RULE-019", new ExtractFieldHandler());
+        ExtractionStrategy.handlerMap.put("RULE-026", new ExtractConstantHandler());
     }
 
     @Override

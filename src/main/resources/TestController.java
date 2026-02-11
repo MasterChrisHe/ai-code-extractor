@@ -2,6 +2,10 @@
 @RequestMapping("/api/user")
 public class UserController {
 
+    public static final String AAA_12="bhj";
+
+    private static final String BBBB_12="bhaj";
+
     private String abc;
 
     @Resource
