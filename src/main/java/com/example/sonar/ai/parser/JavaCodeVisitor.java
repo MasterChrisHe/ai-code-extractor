@@ -39,6 +39,7 @@ public class JavaCodeVisitor extends VoidVisitorAdapter<Map<Rule, List<Snippet>>
         this.strategies.add(new LockDeclarationStrategy());
         this.strategies.add(new JavadocStrategy());
         this.strategies.add(new LogDeclarationStrategy());
+        this.strategies.add(new LongStatementDeclarationStrategy());
     }
 
     @Override

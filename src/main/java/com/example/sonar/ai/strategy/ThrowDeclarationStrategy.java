@@ -13,7 +13,7 @@ import java.util.List;
 public class ThrowDeclarationStrategy implements ExtractionStrategy<ThrowStmt>{
 
     public ThrowDeclarationStrategy() {
-        ExtractionStrategy.handlerMap.put("RULE-025", new ExtractThrowHandler());
+        ExtractionStrategy.handlerMap.put("RULE-024", new ExtractThrowHandler());
     }
 
     @Override

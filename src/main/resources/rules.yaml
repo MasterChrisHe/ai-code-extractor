@@ -119,7 +119,13 @@
   ruleCriteria: ""
   ruleContext: ""
 
-- ruleId: "RULE-025"
+- ruleId: "RULE-023"
+  scope: "LONGSTATEMENT_DECLARATION"
+  ruleDesc: "较长的语句、表达式或参数大于80字符时要分成多行书写，长表达式要在低优先级操作符处划分新行，操作符放在新行之首"
+  ruleCriteria: ""
+  ruleContext: ""
+
+- ruleId: "RULE-024"
   scope: "THROW_DECLARATION"
   ruleDesc: "主动抛出的异常必须要填写详细的描述信息"
   ruleCriteria: ""
